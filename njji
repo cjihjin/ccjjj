@@ -1,0 +1,348 @@
+#include <ansi.h>
+
+inherit COMBINED_ITEM;
+
+string query_autoload() { return query_amount() + ""; }
+
+void autoload(string param)
+{
+	int amt;
+
+	if (sscanf(param, "%d", amt) == 1)
+		set_amount(amt);
+}
+
+void setup()
+{
+	set_amount(1);
+	::setup();
+}
+void create()
+{
+	set_name(HIY"【天珠宝盒】"NOR, ({"tianzhu baohe"}));
+	if( clonep() )
+		set_default_object(__FILE__);
+	else {
+		set("value", 100);
+		set("yuanbao", 500);
+		set("no_give",1);
+		set("no_drop",1);
+		set("no_get",1);
+        set("no_sell",1);
+        set("no_shop",1);
+		set("unit", "个");
+		set("base_unit", "格");
+		set("base_weight", 10);
+		set("base_value", 100);
+		set("long","此物巧夺天工，相传乃盘古精血，汇聚天地灵气凝结而成，内有乾坤，蕴含奇珍（此盒内没有天珠，机率产出合成装备材料）。\n");
+		set("only_do_effect", 1);
+	}
+	setup();
+}
+
+int do_effect(object me)
+{
+	int i;
+	object gift;
+	string *list;
+	string *box=
+({
+
+
+	
+
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+
+	"/clone/vip/putao1",
+	"/clone/vip/putao1",
+
+	"/clone/vip/book_tianfu",
+	"/clone/vip/book_tianfu",
+
+	"/clone/vip/book_wuliang",
+	"/clone/vip/book_wuliang",
+	
+	"/clone/vip/kuilei",
+	"/clone/vip/kuilei",
+	
+	"/clone/vip/jinpiao",
+	"/clone/vip/jinpiao",
+	
+	"/clone/vip/jinsha",
+	"/clone/vip/jinsha",
+	
+	"/clone/vip/wujins",
+	"/clone/vip/wujins",
+	
+	"/clone/vip/xuantie",
+	"/clone/vip/xuantie",
+
+	
+
+
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+
+	"/clone/vip/putao1",
+	"/clone/vip/putao1",
+
+	"/clone/vip/book_tianfu",
+	"/clone/vip/book_tianfu",
+
+	"/clone/vip/book_wuliang",
+	"/clone/vip/book_wuliang",
+	
+	"/clone/vip/kuilei",
+	"/clone/vip/kuilei",
+	
+	"/clone/vip/jinpiao",
+	"/clone/vip/jinpiao",
+	
+	"/clone/vip/jinsha",
+	"/clone/vip/jinsha",
+	
+	"/clone/vip/wujins",
+	"/clone/vip/wujins",
+	
+	"/clone/vip/xuantie",
+	"/clone/vip/xuantie",
+
+
+
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+
+	"/clone/vip/putao1",
+	"/clone/vip/putao1",
+
+	"/clone/vip/book_tianfu",
+	"/clone/vip/book_tianfu",
+
+	"/clone/vip/book_wuliang",
+	"/clone/vip/book_wuliang",
+	
+	"/clone/vip/kuilei",
+	"/clone/vip/kuilei",
+	
+	"/clone/vip/jinpiao",
+	"/clone/vip/jinpiao",
+	
+	"/clone/vip/jinsha",
+	"/clone/vip/jinsha",
+	
+	"/clone/vip/wujins",
+	"/clone/vip/wujins",
+	
+	"/clone/vip/xuantie",
+	"/clone/vip/xuantie",
+
+	
+	
+
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+
+	"/clone/vip/putao1",
+	"/clone/vip/putao1",
+
+	"/clone/vip/book_tianfu",
+	"/clone/vip/book_tianfu",
+
+	"/clone/vip/book_wuliang",
+	"/clone/vip/book_wuliang",
+	
+	"/clone/vip/kuilei",
+	"/clone/vip/kuilei",
+	
+	"/clone/vip/jinpiao",
+	"/clone/vip/jinpiao",
+	
+	"/clone/vip/jinsha",
+	"/clone/vip/jinsha",
+	
+	"/clone/vip/wujins",
+	"/clone/vip/wujins",
+	
+	"/clone/vip/xuantie",
+	"/clone/vip/xuantie",
+
+
+
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+
+	"/clone/vip/putao1",
+	"/clone/vip/putao1",
+
+	"/clone/vip/book_tianfu",
+	"/clone/vip/book_tianfu",
+
+	"/clone/vip/book_wuliang",
+	"/clone/vip/book_wuliang",
+	
+	"/clone/vip/kuilei",
+	"/clone/vip/kuilei",
+	
+	"/clone/vip/jinpiao",
+	"/clone/vip/jinpiao",
+	
+	"/clone/vip/jinsha",
+	"/clone/vip/jinsha",
+	
+	"/clone/vip/wujins",
+	"/clone/vip/wujins",
+	
+	"/clone/vip/xuantie",
+	"/clone/vip/xuantie",
+
+
+
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+	"/clone/vip/putao",
+
+	"/clone/vip/putao1",
+	"/clone/vip/putao1",
+
+	"/clone/vip/book_tianfu",
+	"/clone/vip/book_tianfu",
+
+	"/clone/vip/book_wuliang",
+	"/clone/vip/book_wuliang",
+	
+	"/clone/vip/kuilei",
+	"/clone/vip/kuilei",
+	
+	"/clone/vip/jinpiao",
+	"/clone/vip/jinpiao",
+	
+	"/clone/vip/jinsha",
+	"/clone/vip/jinsha",
+	
+	"/clone/vip/wujins",
+	"/clone/vip/wujins",
+	
+	"/clone/vip/xuantie",
+	"/clone/vip/xuantie",
+
+	
+//套装
+	"/clone/suit/zhan1/suipian/zhan1_suipian",
+	"/clone/suit/zhan1/suipian/zhan1_suipian",
+	"/clone/suit/zhan1/suipian/zhan1_suipian",
+	"/clone/suit/zhan1/suipian/zhan1_suipian",
+
+	"/clone/suit/zhan1/suipian/hexin-armor",
+	"/clone/suit/zhan1/suipian/hexin-boots",
+	"/clone/suit/zhan1/suipian/hexin-finger",
+	"/clone/suit/zhan1/suipian/hexin-hands",
+	"/clone/suit/zhan1/suipian/hexin-head",
+	"/clone/suit/zhan1/suipian/hexin-neck",
+	"/clone/suit/zhan1/suipian/hexin-pants",
+//图腾
+    /*"/clone/tattoohecheng/spcs1",	
+    "/clone/tattoohecheng/spcs2",	
+    "/clone/tattoohecheng/spcs3",	
+    "/clone/tattoohecheng/spcs4",	
+    "/clone/tattoohecheng/spcs5",	
+    "/clone/tattoohecheng/spcs6",	
+    "/clone/tattoohecheng/spcs7",	
+    "/clone/tattoohecheng/spcs8",	
+    "/clone/tattoohecheng/spcs9",	
+    "/clone/tattoohecheng/spcs10",	*/
+
+
+	
+});
+
+ i=random((int)sizeof(box));
+    
+    gift = new(box[i]); 
+	
+	
+	
+      if (me->is_busy())
+                return notify_fail("你正忙着呢。\n");
+
+	if (me->is_fighting())
+		    return notify_fail("正在战斗中，不能使用"+ name() +"。\n");
+		
+		
+		
+ if(random(20)<19){
+	gift->move(me);
+	message_vision(YEL""+ me->query("name") +"打开了天珠宝盒，从里面拿出了"+ gift->name()+"!"NOR"\n",me);
+ }else{
+	 message_vision(YEL"天啊竟然是个空盒，里卖的宝物估计已经被人偷偷盗走了!"NOR"\n",me);
+ }
+
+        if (random(2777)==11&& me->query("zhongjiang_baodi/cishu")>200) 
+		  {
+        
+			me->set("zhongjiang_baodi/cishu",0);
+			gift=new("/clone/vip/yuanshen.c");
+			gift->move(me);
+			
+            message("channel:chat", HIM"只见"+ me->query("name") +"手中轻触机关，莫不成想手中这天珠宝盒竟自己旋转起来！，"+ me->query("name") +"看着手中的天珠宝盒，心中不由的差异，江湖机关术，竟如此神奇,随着机关的缓缓打开，藏在天珠宝盒的宝物也显露了出来“果然是天下奇物，不愧为天珠宝盒”"NOR"\n", users());
+            message("channel:chat", HIG"恭喜："+ me->query("name") +"通过天珠宝盒，获得了江湖传闻极为罕见的元神果！！\n"NOR"",users());
+            }
+			
+		 if (random(4000)==5&& me->query("zhongjiang_baodi/cishu")>30)
+					 {
+            me->add("yuanbaos",3000);
+			me->set("zhongjiang_baodi/cishu",0);
+            message("channel:chat", HIM"只见"+ me->query("name") +"手中轻触机关，莫不成想手中这天珠宝盒竟自己旋转起来！，"+ me->query("name") +"看着手中的天珠宝盒，心中不由的差异，江湖机关术，竟如此神奇,随着机关的缓缓打开，藏在天珠宝盒的宝物也显露了出来“果然是天下奇物，不愧为天珠宝盒”"NOR"\n", users());
+            message("channel:chat", HIG"恭喜："+ me->query("name") +"通过天珠宝盒，获得了元宝票3000！！\n"NOR"",users());
+            }
+			
+			
+		/* if (random(11000)==67&& random(4)==1&&me->query("zhongjiang_tedeng/次数")<1&& me->query("zhongjiang_baodi/cishu")>2000||me->query("zhongjiang_leiji/次数")>3500&&me->query("zhongjiang_tianjing/次数")<1) 
+		{
+			
+			gift=new("/clone/vip/yuanshen.c");
+            gift->move(me);
+			me->set("zhongjiang_tianjing/次数",1);
+			me->set("zhongjiang_baodi/cishu",0);
+            message("channel:chat", HIM"只见"+ me->query("name") +"手中轻触机关，莫不成想手中这天珠宝盒竟自己旋转起来！，"+ me->query("name") +"看着手中的天珠宝盒，心中不由的差异，江湖机关术，竟如此神奇,随着机关的缓缓打开，藏在天珠宝盒的宝物也显露了出来“果然是天下奇物，不愧为天珠宝盒”"NOR"\n", users());
+            message("channel:chat", HIG"恭喜："+ me->query("name") +"通过天珠宝盒，获得了让整个武林都为之疯狂的寰宇天晶碎片！！\n"NOR"",users());
+            }
+			
+			 if (random(13800)==39&&random(30)==1&&me->query("zhongjiang_wujue/次数")<1 && me->query("zhongjiang_baodi/cishu")>2000||me->query("zhongjiang_leiji/次数")>2500&&me->query("zhongjiang_wujue/次数")<1) 
+		{
+			
+			gift=new("/clone/vip/yuanshen");
+            gift->move(me);
+			me->set("zhongjiang_wujue/次数",1);
+			me->set("zhongjiang_baodi/cishu",0);
+            message("channel:chat", HIM"只见"+ me->query("name") +"手中轻触机关，莫不成想手中这天珠宝盒竟自己旋转起来！，"+ me->query("name") +"看着手中的天珠宝盒，心中不由的差异，江湖机关术，竟如此神奇,随着机关的缓缓打开，藏在天珠宝盒的宝物也显露了出来“果然是天下奇物，不愧为天珠宝盒”"NOR"\n", users());
+            message("channel:chat", HIG"恭喜："+ me->query("name") +"通过天珠宝盒，竟然拿到了震惊天下的五绝令！！\n"NOR"",users());
+            }
+		if (random(350)==6&&random(500)==2&&me->query("zhongjiang_yeqiu/次数")<1||me->query("zhongjiang_leiji/次数")>100&&me->query("zhongjiang_yeqiu/次数")<1)
+			{
+			
+			gift=new("/clone/yeqiushu");
+            gift->move(me);
+			me->set("zhongjiang_yeqiu/次数",1);
+		
+             message("channel:chat", HIM"只见"+ me->query("name") +"手中轻触机关，莫不成想手中这天珠宝盒竟自己旋转起来！，"+ me->query("name") +"看着手中的天珠宝盒，心中不由的差异，江湖机关术，竟如此神奇,随着机关的缓缓打开，藏在天珠宝盒的宝物也显露了出来“果然是天下奇物，不愧为天珠宝盒”"NOR"\n", users());
+           message("channel:chat", HIG"恭喜："+ me->query("name") +"通过天珠宝盒             ，竟然得到了昔日小虾米的神功--《野球拳》！！\n"NOR"",users());
+            }	*/
+			
+			
+			me->add("zhongjiang_baodi/cishu",1);
+			//me->add("zhongjiang_leiji/次数",1);
+	add_amount(-1);
+	return 1;
+}
